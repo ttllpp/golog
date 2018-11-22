@@ -1,6 +1,6 @@
-#golang log library
+golang log library
 [https://github.com/sirupsen/logrus](https://github.com/sirupsen/logrus "https://github.com/sirupsen/logrus")
-1. 不支持文件按天存储，基于logrus二次开发，
+1. 支持文件按天存储，基于logrus二次开发，
 2. 增加日志自动按天分割
 3. 支持指定路径存储
 4. 支持到期自动删除
@@ -30,3 +30,15 @@ func main() {
 
 ```
 
+
+输出格式如下
+[![](https://i.imgur.com/fV4dPcn.png)](https://i.imgur.com/fV4dPcn.png)
+
+建议这样使用，可以详细输出具体字段
+```go
+log.WithFields(log.Fields{
+		"test": 111,
+		"name": "myname",
+	}).Info("test")
+
+```
