@@ -1,13 +1,16 @@
 golang log library
-[https://github.com/sirupsen/logrus](https://github.com/sirupsen/logrus "https://github.com/sirupsen/logrus")
-1. 支持文件按天存储，基于logrus二次开发，
+
+1. 支持文件按天存储
 2. 增加日志自动按天分割
 3. 支持指定路径存储
 4. 支持到期自动删除
+5. 支持队列(需自己扩展，在messageQueue.go里)
+6. 按等级划分
+7. 根据当前环境选择是否打印日志到终端
 
 使用方法
 安装go get github.com/ttllpp/golog
-如果设置环境变量Environment=Development 默认输出文本拼接而不是json
+如果设置环境变量RUNMODE=dev 默认输出到终端
 
 ```go
 package main
@@ -17,28 +20,21 @@ import (
 )
 
 func main() {
-	log.SetLevel(log.DebugLevel)
-	//如果不设置存储路径，默认直接输出
-	log.SetPath("./", "test", 5)
-	//使用方法1
-	log.WithFields(log.Fields{
-		"test": 111,
-	}).Info("test")
-	//使用方法2
-	log.Info("test")
+	//初始化日志
+	log.GeneralInit()
+	//或者自定义初始化
+	//
+	//Start(FatalLevel, AlsoStdout, LogFilePath(saveLogFilePath), EveryDay,  Appid(appid), MessageQueueInstance, FatalMessageQueueLevel)
+	log.Debugln("aaa")
+	log.Debugf("bb")
 }
 
 ```
 
 
 输出格式如下
-[![](https://i.imgur.com/fV4dPcn.png)](https://i.imgur.com/fV4dPcn.png)
+```
+2019/11/22 14:57:06 DEBUG [golog.TestLog] (/xxx/log_test.go:10) - debug
 
-建议这样使用，可以详细输出具体字段
-```go
-log.WithFields(log.Fields{
-		"test": 111,
-		"name": "myname",
-	}).Info("test")
 
 ```
