@@ -34,7 +34,8 @@ func main() {
 
 输出格式如下
 ```
-2019/11/22 14:57:06 DEBUG [golog.TestLog] (/xxx/log_test.go:10) - debug
+2019/11/22 14:57:06 DEBUG [golog.TestLog] (/xxx/log_test.go:10) - aaa
+2019/11/22 14:57:06 DEBUG [golog.TestLog] (/xxx/log_test.go:10) - bb
 
 
 ```
