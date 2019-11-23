@@ -245,7 +245,7 @@ func (l Logger) doPrintf(level LogLevel, format string, v ...interface{}) {
 		}
 		if level >= l.level {
 			l.logger.Print(logText)
-			if l.isStdout {
+			if l.isStdout && len(l.logPath) > 0 {
 				log.Print(logText)
 			}
 			if level == FATAL {
@@ -274,7 +274,7 @@ func (l Logger) doPrintln(level LogLevel, v ...interface{}) {
 		}
 		if level >= l.level {
 			l.logger.Print(value)
-			if l.isStdout {
+			if l.isStdout && len(l.logPath) > 0 {
 				log.Print(value)
 			}
 			if level == FATAL {
@@ -342,7 +342,7 @@ func PanicRecover() {
 func GeneralInit() {
 	var appid int = 1
 	saveLogFilePath := "./log/"
-	
+
 	if os.Getenv("RUNMODE") == "dev" {
 		//debug日志
 		Start(DebugLevel, AlsoStdout)
@@ -354,7 +354,7 @@ func GeneralInit() {
 	//error日志
 	Start(ErrorLevel, AlsoStdout, LogFilePath(saveLogFilePath), EveryDay, Appid(appid), MessageQueueInstance, ErrorMessageQueueLevel)
 	//fatal日志
-	Start(FatalLevel, AlsoStdout, LogFilePath(saveLogFilePath), EveryDay,  Appid(appid), MessageQueueInstance, FatalMessageQueueLevel)
+	Start(FatalLevel, AlsoStdout, LogFilePath(saveLogFilePath), EveryDay, Appid(appid), MessageQueueInstance, FatalMessageQueueLevel)
 }
 
 //

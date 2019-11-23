@@ -5,8 +5,10 @@ import (
 )
 
 func TestLog(t *testing.T) {
-	Start(DebugLevel, LogFilePath("./temp/"), DebugLevel, EveryMinute, AlsoStdout)
+	Start(DebugLevel, AlsoStdout)
+	Start(InfoLevel, AlsoStdout, LogFilePath("./temp"), EveryDay)
 
-	Debugln("debug")
-
+	// GeneralInit()
+	Debugf("debug")
+	Infof("info")
 }
