@@ -1,9 +1,8 @@
-package log
+package golog
 
 //发布日志类消息
-import (
-	// "errors"
-)
+
+// "errors"
 
 type messageQueue struct {
 	// messagequeue.Base
@@ -11,7 +10,7 @@ type messageQueue struct {
 
 type PushType struct {
 	Appid    int
-	LogId    string 
+	LogId    string
 	LogTime  string
 	LogText  string
 	LogLevel LogLevel
