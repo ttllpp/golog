@@ -38,7 +38,7 @@ import (
 type LogLevel int
 
 const (
-	DEBUG LogLevel = iota
+	DEBUG LogLevel = 1 << iota
 	INFO
 	WARN
 	ERROR
@@ -223,7 +223,7 @@ type Logger struct {
 	unit              time.Duration
 	isStdout          bool
 	printStack        bool
-	appid             int
+	appid             string
 }
 
 func (l Logger) doPrintf(level LogLevel, format string, v ...interface{}) {
@@ -340,7 +340,7 @@ func PanicRecover() {
 // info,warn,error,fatal日志输出文件
 // error,fatal日志上报kafka
 func GeneralInit() {
-	var appid int = 1
+	var appid string = "1"
 	saveLogFilePath := "./log/"
 
 	if os.Getenv("RUNMODE") == "dev" {
@@ -434,7 +434,7 @@ func LogFilePath(p string) func(Logger) Logger {
 }
 
 //appid 默认0
-func Appid(appid int) func(Logger) Logger {
+func Appid(appid string) func(Logger) Logger {
 	return func(l Logger) Logger {
 		l.appid = appid
 		return l

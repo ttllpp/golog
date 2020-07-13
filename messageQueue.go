@@ -9,7 +9,7 @@ type messageQueue struct {
 }
 
 type PushType struct {
-	Appid    int
+	Appid    string
 	LogId    string
 	LogTime  string
 	LogText  string
